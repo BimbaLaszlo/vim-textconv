@@ -249,6 +249,9 @@ function! textconv#htmlentities#ToEntities()
 endfunction
 
 function! textconv#htmlentities#FromEntities()
+    " Convert numbered characters (like `&#40;`) to their normal form (`@`).
+    silent s/&#\(\d\+\);/\=nr2char(submatch(1))/eg
+
     silent s/&Aacute;/Á/eg
     silent s/&aacute;/á/eg
     silent s/&Acirc;/Â/eg
@@ -261,6 +264,7 @@ function! textconv#htmlentities#FromEntities()
     silent s/&alefsym;/ℵ/eg
     silent s/&Alpha;/Α/eg
     silent s/&alpha;/α/eg
+    silent s/&amp;/\&/eg
     silent s/&and;/∧/eg
     silent s/&ang;/∠/eg
     "silent s/&apos;/'/eg
@@ -325,6 +329,7 @@ function! textconv#htmlentities#FromEntities()
     silent s/&Gamma;/Γ/eg
     silent s/&gamma;/γ/eg
     silent s/&ge;/≥/eg
+    silent s/&gt;/>/eg
     silent s/&harr;/↔/eg
     silent s/&hArr;/⇔/eg
     silent s/&hearts;/♥/eg
@@ -360,6 +365,7 @@ function! textconv#htmlentities#FromEntities()
     silent s/&loz;/◊/eg
     silent s/&lsaquo;/‹/eg
     silent s/&lsquo;/‘/eg
+    silent s/&lt;/</eg
     silent s/&macr;/¯/eg
     silent s/&mdash;/—/eg
     silent s/&micro;/µ/eg
